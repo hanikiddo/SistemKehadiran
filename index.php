@@ -8,6 +8,35 @@
 		img {
 			width: 40%;
 		}
+		 ul {
+  			list-style-type: none;
+  			margin: 0;
+  			padding:0;
+			overflow: hidden;
+			border: 1px solid #e7e7e7;
+			background-color: #dddddd;
+		}
+		li a {
+			display: block;
+			padding: 8px;
+			background-color:#dddddd;
+			color: black;
+			text-align: center;
+			margin-right: 20px;
+			padding: 14px 16px;
+			text-decoration: none;
+		}
+		li {
+			display: inline;
+			float: left;
+			border-right: 1px solid #bbb;
+		}
+		li:last-child {
+			border-right: none;
+		}
+		li a:hover:not(.active) {
+  			background-color: #ddd;
+		}
 		table {
 			background-color: whitesmoke;
 			
