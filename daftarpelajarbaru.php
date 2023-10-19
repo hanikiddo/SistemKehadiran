@@ -1,3 +1,7 @@
+<?php
+include('config.php');
+?>
+
 <html>
   <head>
     <title>KVPJB</title>
@@ -7,35 +11,6 @@
       background-image: url("wallgrey.jpg");
       background-color: #cccccc;
     }
-	   ul {
-  			list-style-type: none;
-  			margin: 0;
-  			padding:0;
-			overflow: hidden;
-			border: 1px solid #e7e7e7;
-			background-color: #dddddd;
-		}
-		li a {
-			display: block;
-			padding: 8px;
-			background-color:#dddddd;
-			color: black;
-			text-align: center;
-			margin-right: 20px;
-			padding: 14px 16px;
-			text-decoration: none;
-		}
-		li {
-			display: inline;
-			float: left;
-			border-right: 1px solid #bbb;
-		}
-		li:last-child {
-			border-right: none;
-		}
-		li a:hover:not(.active) {
-  			background-color: #ddd;
-		}
     img {
       width: 40%;
     }
@@ -48,15 +23,66 @@
       padding-bottom: 10px;
       background-color: white;
     }
+
+    button {
+      appearance: none;
+      background-color: #FAFBFC;
+      border: 1px solid rgba(27, 31, 35, 0.15);
+      border-radius: 6px;
+      box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+      box-sizing: border-box;
+      color: #24292E;
+      cursor: pointer;
+      display: inline-block;
+      font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      list-style: none;
+      padding: 6px 16px;
+      position: relative;
+      transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      white-space: nowrap;
+      word-wrap: break-word;
+      }
+
+    button:hover {
+      background-color: #F3F4F6;
+      text-decoration: none;
+      transition-duration: 0.1s;
+    }
+
+    button:disabled {
+      background-color: #FAFBFC;
+      border-color: rgba(27, 31, 35, 0.15);
+      color: #959DA5;
+      cursor: default;
+    }
+
+    button:active {
+      background-color: #EDEFF2;
+      box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+      transition: none 0s;
+    }
+
+    button:focus {
+      outline: 1px transparent;
+    }
+
+    button:before {
+      display: none;
+    }
+
+    button:-webkit-details-marker {
+      display: none;
+    }
   </style>
   <body>
     <center>
-      <ul>
-			<li><a href="#home">Home</a></li>
-			<li><a href="#news">News</a></li>
-			<li><a href="#about">About</a></li>
-		  </ul>
-		  <br><br>
       <img src="img/logokvperd.jpg">
       <br>
       <h2>SISTEM PENDAFTARAN PELAJAR BAHARU</h2>
@@ -117,51 +143,52 @@
               <th width="24">:
               <th width="205" align="left"><input type="email" id="email" required></th>
             </tr>
+              
           </table>
           <br>
-          <input type="button" name="submit" class="button submit" value="Submit" onclick="addStudent()">
-      </div>
-      </form>
-      </div>
+            <button>SUBMIT</button>
+          </form>
+        </div>
     </center>
   </body>
   </html>
 
   <script>
-  // Array untuk menyimpan senarai kehadiran pelajar 2 KPD 1
-  var senaraiKehadiran = [];
-
+  // Fungsi untuk menambahkan pelajar baru
   function addStudent() {
-    // Dapatkan data dari borang
-    var nama = document.getElementById('nama').value;
-    var noMatrik = document.getElementById('noMatrik').value;
-    var kelas = document.getElementById('kelas').value;
-    var kohort = document.getElementById('kohort').value;
-    var email = document.getElementById('email').value;
+    // Dapatkan input dari formula
+    var nama = document.getElementById("nama").value;
+    var noMatrik = document.getElementById("noMatrik").value;
+    var kelas = document.getElementById("kelas").value;
+    var kohort = document.getElementById("kohort").value;
+    var email = document.getElementById("email").value;
 
-    // Periksa kelas adalah "2 KPD 1" sebelum menambahkan ke senarai kehadiran
-    if (kelas === '2 KPD 1') {
-      // Buat objek pelajar
-      var pelajar = {
+    // Cek jika pelajar adalah dari kelas 2 KPD 1
+    if (kelas === "2 KPD 1") {
+      // Buat objek data pelajar
+      var studentData = {
         nama: nama,
         noMatrik: noMatrik,
+        kelas: kelas,
         kohort: kohort,
-        email: email,
+        email: email
       };
 
-      // Tambahkan pelajar ke senarai kehadiran
-      senaraiKehadiran.push(pelajar);
-
-      // Resetkan borang
-      document.getElementById('nama').value = '';
-      document.getElementById('noMatrik').value = '';
-      document.getElementById('kohort').value = '';
-      document.getElementById('email').value = '';
+      // Kirim data pelajar ke server menggunakan AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "simpan_pelajar.php", true); // Gantilah "simpan_pelajar.php" dengan nama skrip PHP yang sesuai di sisi server
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Berhasil menyimpan data, Anda dapat menampilkan pesan sukses atau mengambil tindakan lain.
+          alert("Pelajar baru telah didaftarkan!");
+          // Atur ulang formulir
+          document.getElementById("insert").reset();
+        }
+      };
+      xhr.send(JSON.stringify(studentData));
     } else {
-      alert('Hanya pelajar kelas 2 KPD 1 yang dibenarkan.');
+      alert("Pelajar harus dari kelas 2 KPD 1 untuk mendaftar.");
     }
-
-    // Debug: Paparkan senarai kehadiran di konsol
-    console.log('Senarai Kehadiran 2 KPD 1:', senaraiKehadiran);
   }
 </script>
