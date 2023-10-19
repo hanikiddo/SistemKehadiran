@@ -45,6 +45,11 @@
         </table>
     <div align="center">
         <span><strong><?php echo $error; ?></strong></span><br>
-        <input type="submit" name="submit" class="button submit" value="Submit">
+        <input type="submit" onclick="submit()" name="submit" class="button submit" value="Submit">
 
 </div>
+    <script>
+        Function submit(){
+            alert('')
+        }
+    </script>
