@@ -23,11 +23,6 @@
         text-align: center;
     }
 </style>
-<ul>
-			<li><a href="index.php">Home</a></li>
-			<li><a href="daftarpelajarbaru.php">Pendaftaran Pelajar Baharu</a></li>
-		  </ul>
-		  <br><br>
 <img src="logo.jpg">
 <div class="semua">
 <h2>SISTEM KEHADIRAN PELAJAR</h2>
