@@ -20,6 +20,11 @@
 		}
 	</style>
 	<body>
+		<ul>
+			<li><a href="index.php">Home</a></li>
+			<li><a href="daftarpelajarbaru.php">Pendaftaran Pelajar Baharu</a></li>
+		  </ul>
+		<br><br>
 		<center><img src="logo kvpjb.jpeg"><br></center>
 		<center><h3>SISTEM KEHADIRAN PELAJAR 2 KPD 1</h3><br></center>
 		<br>
